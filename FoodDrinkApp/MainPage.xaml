@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:FoodDrinkApp.Models"
+             x:Class="FoodDrinkApp.MainPage"
+             Title="NutriTrack">
+    <Grid RowDefinitions="Auto,*">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#ECEFF1" Offset="0.0" />
+                <GradientStop Color="#E0E0E0" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid Padding="20,18,20,18" BackgroundColor="#1A237E">
+            <Border StrokeThickness="0" Padding="18">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0" />
+                </Border.StrokeShape>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1A237E" Offset="0.0" />
+                        <GradientStop Color="#3F51B5" Offset="0.62" />
+                        <GradientStop Color="#7986CB" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Shadow>
+                    <Shadow Brush="#33000000" Offset="0,4" Radius="8" Opacity="0.3" />
+                </Border.Shadow>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
+                    <Label Text="NutriTrack"
+                           FontSize="31"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           SemanticProperties.HeadingLevel="Level1" />
+                    <Label Grid.Row="1"
+                           Text="Track nutrition, flavour, photos, and meal context in one place."
+                           FontSize="15"
+                           TextColor="#E8EAF6" />
+                    <Grid Grid.Row="2" ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,3,0,0">
+                        <Border BackgroundColor="#33FFFFFF" StrokeThickness="0" Padding="10,7">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0" />
+                            </Border.StrokeShape>
+                            <Label Text="Nutrition" TextColor="#FFFFFF" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        </Border>
+                        <Border Grid.Column="1" BackgroundColor="#33FFFFFF" StrokeThickness="0" Padding="10,7">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0" />
+                            </Border.StrokeShape>
+                            <Label Text="Photos" TextColor="#FFFFFF" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        </Border>
+                        <Border Grid.Column="2" BackgroundColor="#33FFFFFF" StrokeThickness="0" Padding="10,7">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0" />
+                            </Border.StrokeShape>
+                            <Label Text="Voice" TextColor="#FFFFFF" FontSize="12" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10" Margin="0,6,0,0">
+                        <Border StrokeThickness="1"
+                                Stroke="#C5CAE9"
+                                BackgroundColor="#FFFFFF"
+                                Padding="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0" />
+                            </Border.StrokeShape>
+                            <SearchBar x:Name="SearchFoodBar"
+                                       Placeholder="Search foods, drinks, categories, or tags"
+                                       TextChanged="OnSearchTextChanged"
+                                       SearchButtonPressed="OnSearchButtonPressed"
+                                       TextColor="#212121"
+                                       PlaceholderColor="#9E9E9E"
+                                       BackgroundColor="Transparent"
+                                       SemanticProperties.Hint="Search the food and drink list" />
+                        </Border>
+                        <Button Grid.Column="1"
+                                Text="Add"
+                                BackgroundColor="#3F51B5"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="0"
+                                Clicked="OnAddClicked"
+                                SemanticProperties.Hint="Add a new food or drink record" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <RefreshView Grid.Row="1" x:Name="FoodRefreshView" Refreshing="OnRefreshing">
+            <CollectionView x:Name="FoodCollection"
+                            SelectionMode="None"
+                            EmptyView="No matching food or drink records."
+                            Margin="16,0,16,18">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:FoodItem">
+                        <Border StrokeThickness="1"
+                                Stroke="#E0E0E0"
+                                BackgroundColor="#FFFFFF"
+                                Padding="0"
+                                Margin="0,0,0,12">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0" />
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="#22000000" Offset="0,2" Radius="4" Opacity="0.15" />
+                            </Border.Shadow>
+                            <Grid ColumnDefinitions="6,*">
+                                <BoxView BackgroundColor="#3F51B5" />
+                                <Grid Grid.Column="1" Padding="16" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8" ColumnSpacing="10">
+                                    <Label Text="{Binding Name}"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#1A237E"
+                                           SemanticProperties.HeadingLevel="Level2" />
+                                    <Border Grid.Column="1"
+                                            StrokeThickness="0"
+                                            BackgroundColor="#E8EAF6"
+                                            Padding="10,5">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="0" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding CaloriesLabel}"
+                                               FontSize="13"
+                                               FontAttributes="Bold"
+                                               TextColor="#3F51B5" />
+                                    </Border>
+                                    <Label Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Description}"
+                                           FontSize="14"
+                                           TextColor="#546E7A"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding MacroSummary}"
+                                           FontSize="13"
+                                           TextColor="#3F51B5" />
+                                    <Grid Grid.Row="3" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                                        <Label Text="{Binding Category}"
+                                               FontSize="13"
+                                               FontAttributes="Bold"
+                                               TextColor="#3F51B5" />
+                                        <Button Grid.Column="1"
+                                                Text="Details"
+                                                Padding="14,8"
+                                                BackgroundColor="#3F51B5"
+                                                TextColor="#FFFFFF"
+                                                CornerRadius="0"
+                                                CommandParameter="{Binding Id}"
+                                                Clicked="OnDetailsClicked"
+                                                SemanticProperties.Hint="Open nutrition details" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

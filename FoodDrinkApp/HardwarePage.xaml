@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FoodDrinkApp.HardwarePage"
+             Title="Hardware Demo">
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#ECEFF1" Offset="0.0" />
+                <GradientStop Color="#E0E0E0" Offset="1.0" />
+            </LinearGradientBrush>
+        </ScrollView.Background>
+
+        <VerticalStackLayout Padding="22" Spacing="16">
+            <Border StrokeThickness="0" Padding="18" BackgroundColor="#FFFFFF">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Mobile hardware"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#1A237E"
+                           SemanticProperties.HeadingLevel="Level1" />
+                    <Label Text="Demonstrate camera, location, speech, vibration, and haptic feedback."
+                           FontSize="15"
+                           TextColor="#546E7A" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeThickness="1"
+                    Stroke="#E0E0E0"
+                    BackgroundColor="#FFFFFF"
+                    Padding="16">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Food photo" FontSize="17" FontAttributes="Bold" TextColor="#3F51B5" />
+                            <Label Text="Capture the colour and condition of the meal." FontSize="13" TextColor="#546E7A" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1"
+                                Text="Photo"
+                                BackgroundColor="#3F51B5"
+                                TextColor="#FFFFFF"
+                                CornerRadius="0"
+                                Clicked="OnTakePhotoClicked"
+                                SemanticProperties.Hint="Open the camera to capture a food image" />
+                    </Grid>
+                    <Border StrokeThickness="0"
+                            BackgroundColor="#E8EAF6"
+                            HeightRequest="220">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="0" />
+                        </Border.StrokeShape>
+                        <Image x:Name="FoodPhoto"
+                               Aspect="AspectFill"
+                               SemanticProperties.Description="Captured food photo preview" />
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StrokeThickness="1"
+                    Stroke="#E0E0E0"
+                    BackgroundColor="#FFFFFF"
+                    Padding="16">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0" />
+                </Border.StrokeShape>
+                <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Meal location" FontSize="17" FontAttributes="Bold" TextColor="#1A237E" />
+                            <Label Text="Show country, city, region, and coordinates." FontSize="13" TextColor="#546E7A" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1"
+                                Text="Locate"
+                                BackgroundColor="#1A237E"
+                                TextColor="#FFFFFF"
+                                CornerRadius="0"
+                                Clicked="OnGetLocationClicked"
+                                SemanticProperties.Hint="Use location to record the meal place" />
+                    </Grid>
+                    <Label x:Name="LocationLabel"
+                           Grid.Row="1"
+                           Text="Location has not been captured yet."
+                           FontSize="15"
+                           TextColor="#546E7A" />
+                    <Label x:Name="CoordinateLabel"
+                           Grid.Row="2"
+                           Text="Coordinates will appear here."
+                           FontSize="13"
+                           TextColor="#9E9E9E" />
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Text="Read help"
+                        BackgroundColor="#3F51B5"
+                        TextColor="#FFFFFF"
+                        CornerRadius="0"
+                        Clicked="OnReadHelpClicked"
+                        SemanticProperties.Hint="Read the help text aloud" />
+                <Button Grid.Column="1"
+                        Text="Stop speech"
+                        BackgroundColor="#FFFFFF"
+                        BorderColor="#3F51B5"
+                        BorderWidth="1"
+                        TextColor="#3F51B5"
+                        CornerRadius="0"
+                        Clicked="OnStopSpeechClicked"
+                        SemanticProperties.Hint="Stop current speech" />
+            </Grid>
+
+            <Button Text="Haptic feedback"
+                    BackgroundColor="#FFFFFF"
+                    BorderColor="#3F51B5"
+                    BorderWidth="1"
+                    TextColor="#3F51B5"
+                    CornerRadius="0"
+                    Clicked="OnFeedbackClicked"
+                    SemanticProperties.Hint="Trigger vibration and haptic feedback" />
+
+            <Border StrokeThickness="0"
+                    BackgroundColor="#E8EAF6"
+                    Padding="14">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="6">
+                    <Label x:Name="HardwareStatusLabel"
+                           Text="Ready."
+                           FontAttributes="Bold"
+                           TextColor="#3F51B5" />
+                    <Label x:Name="FeedbackCountLabel"
+                           Text="Haptic feedback tests: 0"
+                           FontSize="13"
+                           TextColor="#546E7A" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
